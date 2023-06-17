@@ -10,39 +10,45 @@ export default function AdviceCard() {
       refetchOnWindowFocus: false,
     });
 
-  if (status === "loading")
-    return <div className="advice-card">Loading...</div>;
-  if (status === "error") return <div className="advice-card">Error</div>;
   return (
     <>
       <div className="advice-card">
-        <div className="advice-card__content">
-          <div className="advice-card__id">
-            {isFetching ? (
-              <h2 className="spinner" style={{ height: 10, width: 10 }}></h2>
-            ) : (
-              <h2>Advice #{data.id}</h2>
-            )}
-          </div>
-          <div className="advice-card__advice">
-            {isFetching ? (
-              <div className="spinner" style={{ height: 30, width: 30 }}></div>
-            ) : (
-              <p>“{data.advice}”</p>
-            )}
-          </div>
+        {status === "loading" ? (
+          <div className="spinner" style={{ height: 30, width: 30 }}></div>
+        ) : status === "error" ? (
+          <div className="advice-card">Something is wrong</div>
+        ) : (
+          <div className="advice-card__content">
+            <div className="advice-card__id">
+              {isFetching ? (
+                <h2 className="spinner" style={{ height: 10, width: 10 }}></h2>
+              ) : (
+                <h2>Advice #{data.id}</h2>
+              )}
+            </div>
+            <div className="advice-card__advice">
+              {isFetching ? (
+                <div
+                  className="spinner"
+                  style={{ height: 30, width: 30 }}
+                ></div>
+              ) : (
+                <p>“{data.advice}”</p>
+              )}
+            </div>
 
-          <img
-            className="desktop-img"
-            src="/pattern-divider-desktop.svg"
-            alt="pattern-divider-desktop"
-          />
-          <img
-            src="/pattern-divider-mobile.svg"
-            alt="pattern-divider-mobile"
-            className="mobile-img"
-          />
-        </div>
+            <img
+              className="desktop-img"
+              src="/pattern-divider-desktop.svg"
+              alt="pattern-divider-desktop"
+            />
+            <img
+              src="/pattern-divider-mobile.svg"
+              alt="pattern-divider-mobile"
+              className="mobile-img"
+            />
+          </div>
+        )}
       </div>
       <button className="advice-card__button" onClick={() => refetch()}>
         <img src="/icon-dice.svg" alt="icon-dice" />

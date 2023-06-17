@@ -1,5 +1,6 @@
 import axios from "axios";
 import { QueryFunction } from "@tanstack/react-query";
+
 export interface IAdvice {
   advice: string;
   id: number;
